@@ -17,15 +17,15 @@ function fetchAndUpdateLatestEntry() {
         const newLatestEntry = entries[0]; // Assuming the first entry is the latest
         if (
           !latestEntry ||
-          newLatestEntry.querySelector("pubDate").textContent >
-            latestEntry.querySelector("pubDate").textContent
+          newLatestEntry.querySelector("guid").textContent !==
+            latestEntry.querySelector("guid").textContent
         ) {
           latestEntry = newLatestEntry;
           console.log(latestEntry);
           let newJobLink = latestEntry.querySelector("guid").textContent;
           console.log(newJobLink);
-
-          window.open(newJobLink, "_blank");
+          refineLink = newJobLink.replace(/\?source=rss$/, "");
+          window.open(refineLink, "_blank");
           // Fetch active tabs and send message to popup
           chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             if (chrome.runtime.lastError) {
@@ -50,7 +50,7 @@ function fetchAndUpdateLatestEntry() {
     });
 }
 // Fetch RSS feed data every 5 minutes
-setInterval(fetchAndUpdateLatestEntry, 3 * 60 * 1000);
+setInterval(fetchAndUpdateLatestEntry, 1 * 60 * 1000);
 
 // Initial fetch when extension starts
 fetchAndUpdateLatestEntry();
