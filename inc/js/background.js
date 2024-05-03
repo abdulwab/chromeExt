@@ -1,8 +1,7 @@
 let latestEntry = null;
 
 function fetchAndUpdateLatestEntry() {
-  const rssURL =
-    "https://www.upwork.com/ab/feed/topics/rss?securityToken=7ef2a4f1001abebcf4d37460e432a8f38587b1779ce724e0c55cc9d033cfb74a66ab0ecb11c5b1b4f1d0f18d4804cdf2166b7beff5177c255f2f2e1cf637188e&userUid=651708445704474624&orgUid=651708445708668929";
+  const rssURL = "Enter Your Rssfeed link";
 
   fetch(rssURL)
     .then((response) => response.text())
@@ -50,7 +49,7 @@ function fetchAndUpdateLatestEntry() {
     });
 }
 // Fetch RSS feed data every 5 minutes
-setInterval(fetchAndUpdateLatestEntry, 1 * 60 * 1000);
+setInterval(fetchAndUpdateLatestEntry, 10 * 60 * 1000);
 
 // Initial fetch when extension starts
 fetchAndUpdateLatestEntry();
